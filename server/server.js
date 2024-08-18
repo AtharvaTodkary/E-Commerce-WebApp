@@ -4,11 +4,12 @@ const mongoose = require("mongoose");
 require('dotenv').config();
 const cookieParser = require("cookie-parser");
 const fileUpload = require('express-fileupload')
+const CORS = require('cors');
 
 const URI = process.env.MONGODB_URL;
 const PORT = process.env.port || 5000;
 
-
+app.use(CORS());
 app.use(express.json());
 app.use(cookieParser());
 app.use(fileUpload({

@@ -10,17 +10,15 @@ const userCtrl = {
       // Check if the email is already registered
       const user = await Users.findOne({ email });
       if (user)
-        return res.status(400).json({ msg: "Email already registered" });
-
+        return res.status(400).json({ msg: "Email Already Registered" });
       // Check password length
-      if (password.length < 6) {
+      if (password.length < 6)
         return res
           .status(400)
-          .json({ msg: "Password must be at least 6 characters long" });
-      }
+          .json({ msg: "Password is at least 6 character" });
+
       //password encryption
       const passwordHash = await bcrypt.hash(password, 10);
-
       // Create a new user
       const newUser = new Users({
         name,
@@ -28,21 +26,21 @@ const userCtrl = {
         password: passwordHash,
       });
 
-      // Save the new user
+      //Save mongodb
       await newUser.save();
 
       //create jwt to authenticate
-      const accessToken = createAccessToken({ id: newUser._id });
-      const refreshToken = createRefreshToken({ id: newUser._id });
+      const accesstoken = createAccessToken({ id: newUser._id });
+      const refreshtoken = createRefreshToken({ id: newUser._id });
 
-      res.cookie("refreshtoken", refreshToken, {
+      res.cookie("refreshtoken", refreshtoken, {
         httpOnly: true,
         path: "/user/refresh_token",
       });
 
-      res.json({ accessToken, refreshToken });
-    } catch (error) {
-      return res.status(500).json({ msg: error.message });
+      res.json({ accesstoken });
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
     }
   },
   refreshtoken: async (req, res) => {
@@ -55,60 +53,56 @@ const userCtrl = {
         if (err)
           return res.status(400).json({ msg: "Please Login or Register" });
         const accesstoken = createAccessToken({ id: user.id });
-        res.json({ user, accesstoken });
+        res.json({ accesstoken });
+      });
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
+  },
+  login: async (req, res) => {
+    try {
+      const { email, password } = req.body;
+
+      const user = await Users.findOne({ email });
+      if (!user) return res.status(400).json({ msg: "User does not exist" });
+
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) return res.status(400).json({ msg: "Incorrect Password" });
+
+      const accesstoken = createAccessToken({ id: user._id });
+      const refreshtoken = createRefreshToken({ id: user._id });
+
+      res.cookie("refreshtoken", refreshtoken, {
+        httpOnly: true,
+        path: "/user/refresh_token",
       });
 
-    } catch (error) {
-        return res.status(500).json({msg:error.message})
+      res.json({ accesstoken });
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
     }
   },
-  login: async(req, res)=>{
-    try {
-      const {email, password} = req.body;
-      //find the user with email
-      const user = await Users.findOne({email}) 
-
-      if(!user) return res.status(400).json({msg:"User Does not exist"});
-      //If user exist compare the hash password
-      const isMatch = await bcrypt.compare(password, user.password);
-      if(!isMatch) return res.status(400).json({msg:"Incorrect Password"});
-      //Establish the access and Refresh token 
-      const accesstoken =  createAccessToken({ id: user._id });
-      const refreshtoken =  createAccessToken({ id: user._id });
-
-      res.cookie('refreshtoken', refreshtoken,{
-        httpOnly: true,
-        path: '/user/refresh_token'
-      })
-
-      res.json({accesstoken});
-    } catch (error) {
-      return res.status(500).json({msg:error.message})
-    }
-  },
-  logout: async(req,res)=>{
+  logout: async (req, res) => {
     try {
       //Destroy the cookies for this session
-      res.clearCookie('refreshToken', {path: '/user/refresh_token'})
-      return res.json({msg:"Logout Success"});
+      res.clearCookie("refreshtoken", { path: "/user/refresh_token" });
+      return res.json({ msg: "Logout Success" });
     } catch (error) {
-      return res.status(500).json({msg:error.message})
+      return res.status(500).json({ msg: error.message });
     }
   },
-  getUser: async(req,res)=>{
+  getUser: async (req, res) => {
     try {
-      //find user with id(Id of accesstoken) and dont select password 
-      const user = await Users.findById(req.user.id).select('-password');
+      //find user with id(Id of accesstoken) and dont select password
+      const user = await Users.findById(req.user.id).select("-password");
       //if user not found
-      if(!user) return res.status(400).json({msg:"User Not Found"})
+      if (!user) return res.status(400).json({ msg: "User Not Found" });
       res.json(user);
     } catch (error) {
-      return res.status(500).json({msg:error.message})
+      return res.status(500).json({ msg: error.message });
     }
-  }
+  },
 };
-
-
 
 //Function To Create Tokens(Access Token)
 const createAccessToken = (payLoad) => {

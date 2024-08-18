@@ -50,7 +50,7 @@ class APIfeatures {
 const productCtrl = {
   getProducts: async (req, res) => {
     try {
-      console.log(req.query);
+      // console.log(req.query);
       //get all products from the database
       const features = new APIfeatures(Products.find(), req.query)
         .filtering()
@@ -58,7 +58,7 @@ const productCtrl = {
         .pagination();
       const products = await features.query;
 
-      res.json({result: products.length});
+      res.json({products: products});
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
