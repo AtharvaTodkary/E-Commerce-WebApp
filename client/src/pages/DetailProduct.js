@@ -9,6 +9,9 @@ export default function DetailProduct(){
     const state = useContext(GlobalState);
     const products = state.productAPI.products;
     const [detailProduct, setDetailProduct] = useState({});
+    const addCart = state.userAPI.addCart;
+    const removeCart = state.userAPI.removeCart;
+
 
     useEffect(()=>{
         if(params){
@@ -21,7 +24,7 @@ export default function DetailProduct(){
     return(
         <>
             <NavigationBar />
-            <ViewProduct productInfo={detailProduct} />
+            <ViewProduct productInfo={detailProduct} addCart={addCart}/>
         </>
     );
 }

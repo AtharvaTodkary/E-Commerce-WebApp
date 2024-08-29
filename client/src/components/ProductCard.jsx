@@ -12,7 +12,7 @@ export default function ProductCard({ product, isAdmin, addCart }) {
           <img className="card-img-top p-3 rounded" src={product.images.url} alt={product.title} height={400} />
           <div className="card-body">
             <h5 className="card-title">{product.title}</h5>
-            <p className="card-text">${product.price}</p>
+            <p className="card-text">₹{product.price}</p>
             <div className="d-flex justify-content-evenly">
               {isAdmin ?
                 (<>

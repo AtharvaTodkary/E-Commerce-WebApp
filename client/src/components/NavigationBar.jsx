@@ -19,13 +19,14 @@ export default function NavigationBar() {
     localStorage.clear();
     setIsAdmin(false);
     setIsLogged(false);
+    window.location.reload();
   }
 
   const adminRouter = () => {
     return (
       <>
-        <li className="nav-item"><Link className="nav-link" to='/create_product'>Create Products</Link></li>
-        <li className="nav-item"><Link className="nav-link" to='/category'>Categories</Link></li>
+        <li className="nav-item"><Link className="nav-link" to='/createProduct'>Create Products</Link></li>
+        <li className="nav-item"><Link className="nav-link" to='/categories'>Categories</Link></li>
       </>
     )
   }
@@ -73,7 +74,7 @@ export default function NavigationBar() {
               </li>
 
               <li className="nav-item">
-                <Link className="nav-link" to="#">
+                <Link className="nav-link" to="/about">
                   About
                 </Link>
               </li>

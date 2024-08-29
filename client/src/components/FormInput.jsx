@@ -3,7 +3,7 @@ import React from "react";
 export default function FormInput(props) {
   return (
     <>
-      <label htmlFor={props.name} className="form-label pt-2">
+      <label htmlFor={props.name} className="form-label fs-5 pt-2">
         {props.title}
       </label>
       <input

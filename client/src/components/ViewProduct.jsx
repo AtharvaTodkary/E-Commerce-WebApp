@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ViewProduct({ productInfo }) {
+export default function ViewProduct({ productInfo, addCart }) {
     // Log the productInfo to check its structure
     console.log(productInfo);
 

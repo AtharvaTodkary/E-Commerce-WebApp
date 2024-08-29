@@ -87,7 +87,7 @@ const productCtrl = {
       //create a schema
       const newProduct = new Products({
         product_id,
-        title: title.toLowerCase(),
+        title,
         price,
         description,
         content,

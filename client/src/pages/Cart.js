@@ -34,12 +34,12 @@ export default function Cart() {
               <div className="col-md-8 box-detail">
                 <div className="d-flex">
                     <div className="col-md-10">{item.title} | {item.content}</div>
-                    <div className="col-md-2 text-center fs-5 fw-bold"> ${item.price} </div>
+                    <div className="col-md-2 text-center fs-5 fw-bold"> ₹{item.price} </div>
                 </div>
                 {/* <div>Price: {item.price}</div> */}
                 {/* <div>Name: {item.title}</div> */}
                 <div> 
-                  <Link to="#" onClick={()=>removeCart()}>Delete </Link> 
+                  <Link to="#" onClick={()=>removeCart(item)}>Delete </Link> 
                 </div>
               </div>
             </div>

@@ -8,6 +8,10 @@ import { DataProvider } from "./GlobalState";
 import Products from "./pages/Products";
 import DetailProduct from "./pages/DetailProduct";
 import Cart from "./pages/Cart";
+import CreateProduct from "./pages/CreateProduct";
+import About from "./pages/About";
+import History from "./pages/History";
+import Categories from "./pages/Categories";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +36,22 @@ const router = createBrowserRouter([
   {
     path: '/cart',
     element: <Cart/>,
+  },
+  {
+    path:'/createProduct',
+    element: <CreateProduct/>,
+  },
+  {
+    path: '/about',
+    element: <About />,
+  },
+  {
+    path: '/history',
+    element: <History />
+  },
+  {
+    path: '/categories',
+    element: <Categories />
   }
 ]);
 
