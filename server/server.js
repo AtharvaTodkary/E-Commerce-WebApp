@@ -7,7 +7,7 @@ const fileUpload = require('express-fileupload')
 const CORS = require('cors');
 
 const URI = process.env.MONGODB_URL;
-const PORT = process.env.port || 5000;
+const port = process.env.PORT || 5000;
 
 app.use(CORS());
 app.use(express.json());
@@ -38,6 +38,6 @@ const connectDB = async () => {
 
 connectDB();
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });

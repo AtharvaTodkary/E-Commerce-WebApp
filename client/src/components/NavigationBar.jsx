@@ -60,7 +60,6 @@ export default function NavigationBar() {
           </button>
           <div className="collapse navbar-collapse mx-5 " id="navbarColor02">
             <ul className="navbar-nav me-auto">
-
               <li className="nav-item">
                 <Link className="nav-link" to="/">
                   Home
@@ -91,24 +90,12 @@ export default function NavigationBar() {
 
             </ul>
             {isAdmin ? '' :
-              <>
-                <form className="d-flex me-5">
-                  <input
-                    className="form-control me-sm-2"
-                    type="search"
-                    placeholder="Search"
-                  />
-                  <button className="btn btn-secondary my-2 my-sm-0" type="submit">
-                    Search
-                  </button>
-                </form>
-                <div className="ShopCart">
-                  <span>{cart.length}</span>
-                  <Link to="/cart">
-                    <i className="fa-solid fa-cart-shopping me-sm-2 mt-2 me-5 fs-3"></i>
-                  </Link>
-                </div>
-              </>
+              <div className="ShopCart">
+                <span>{cart.length}</span>
+                <Link to="/kart">
+                  <i className="fa-solid fa-cart-shopping me-sm-2 mt-2 me-5 fs-3"></i>
+                </Link>
+              </div>
             }
           </div>
         </div>
