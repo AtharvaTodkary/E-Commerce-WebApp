@@ -9,7 +9,7 @@ export default function History() {
         <div className="col-md-5 text-center">
           <h1>Order History</h1>
           <p>Your order history will be displayed here.</p> <br />
-          <span className="fs-1">Page under Development :{`(`}</span>
+          <p className="fs-1 fw-bolder text-danger p-5">No Order History</p>
         </div>
       </div>
     </>

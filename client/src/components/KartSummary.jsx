@@ -25,15 +25,15 @@ export default function KartSummary(props) {
             <h4 className="mb-3">Order Summary</h4>
             <div className="d-flex justify-content-between">
                 <span>Subtotal</span>
-                <span>${totalPrice}</span>
+                <span>₹ {totalPrice}</span>
             </div>
             <div className="d-flex justify-content-between">
                 <span>Tax</span>
-                <span>${0.16*totalPrice}</span>
+                <span>₹ {0.16*totalPrice}</span>
             </div>
             <div className="d-flex justify-content-between font-weight-bold">
                 <span>Total</span>
-                <span>${totalPrice*1.16}</span>
+                <span>₹ {totalPrice*1.16}</span>
             </div>
             <span
                 className="btn btn-checkout btn-block mt-4"

@@ -1,34 +1,37 @@
 import React from "react";
+import CategoryHighlight from "./CategoryHighlight";
+import FeaturedProducts from "./FeaturedProducts";
+import DealSection from "./DealSection";
+import Testimonial from "./Testimonial";
+import Footer from "../utils/Footer";
+import Introduction from "./Introduction";
 
 export default function Landing() {
   return (
     <>
+    <Introduction/>
       <div className="col-md-12 d-flex justify-content-center">
-        <div className="col-md-6 text-justify">
-          <span className="fw-medium " style={{ fontSize: "110px", fontFamily: "revert" }}>Be inspired by the best.</span>
-        </div>
-        <img src="https://res.cloudinary.com/dz0k1nwka/image/upload/v1724095684/test/hd4kjtunzr2yebqvswnt.png" alt="" />
-      </div>
-      <div className="col-md-12 d-flex justify-content-center mt-5 mb-5">
-        <div className="col-md-10 d-flex justify-content-evenly">
-          <div className="p-3 rounded border">
-            <img src="https://res.cloudinary.com/dz0k1nwka/image/upload/v1724096910/test/geepzmqyrts1lr2g9ft7.png" alt="Watch1" height={300} /><br />
-            <h6 className="text-center p-2 fw-medium">Calvin Klein </h6>
-          </div>
-          <div className="p-3 rounded border">
-            <img src="https://res.cloudinary.com/dz0k1nwka/image/upload/v1724097010/test/dmjuonjiftgtlulssicl.jpg" alt="Watch2" height={300} />
-            <h6 className="text-center p-2 fw-medium">Vintage Omega Seamaster</h6>
-          </div>
-          <div className="p-3 rounded border">
-            <img src="https://res.cloudinary.com/dz0k1nwka/image/upload/v1724098142/test/c4bifewwclnf9dzyxwj1.jpg" alt="Watch3" height={300} />
-            <h6 className="text-center p-2 fw-medium">OUPINKE</h6>
-          </div>
-          <div className="p-3 rounded border">
-            <img src="https://res.cloudinary.com/dz0k1nwka/image/upload/v1724098059/test/pffncm9rk8y55hswru0c.jpg" alt="Watch4" height={300} />
-            <h6 className="text-center p-2 fw-medium">Rolex</h6>
+        <div className="container d-flex justify-content-center align-items-center row">
+          <div className="col-12 col-md-10 d-flex flex-column flex-md-row align-items-center">
+            <div className="col-md-6 text-center text-md-start">
+              <span className="fs-1 fw-bolder">Be inspired by the best.</span>
+            </div>
+            <div className="col-md-6 d-flex justify-content-center">
+              <img
+                src="https://res.cloudinary.com/dz0k1nwka/image/upload/v1724095684/test/hd4kjtunzr2yebqvswnt.png"
+                alt="Inspiration"
+                className="img-fluid"
+              />
+            </div>
           </div>
         </div>
       </div>
+
+      <CategoryHighlight />
+      <FeaturedProducts />
+      <DealSection />
+      <Testimonial />
+      <Footer />
     </>
   );
 }

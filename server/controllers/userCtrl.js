@@ -102,6 +102,26 @@ const userCtrl = {
       return res.status(500).json({ msg: error.message });
     }
   },
+  updateUser: async (req, res) => {
+    try {
+      const { email, cart } = req.body;
+
+      const user = await Users.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+
+    // Update user's cart
+    await Users.updateOne({ email }, { $set: { cart } });
+    
+    // Send success response
+    return res.status(200).json({ msg: "User cart updated successfully" });
+    
+  } catch (error) {
+    console.error(error);  // Log the error for debugging
+    return res.status(500).json({ msg: "Failed to update user" });
+  }
+  },
 };
 
 //Function To Create Tokens(Access Token)

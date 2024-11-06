@@ -12,7 +12,7 @@ export default function NavigationBar() {
   const userInfor = state.userAPI.userInfor;
   const [cart] = state.userAPI.cart;
 
-
+  // console.log(userInfor)
 
   async function handleLogout() {
     await axios.get('/user/logout');
@@ -45,7 +45,10 @@ export default function NavigationBar() {
       <nav className="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
         <div className="container-fluid">
           <Link className="navbar-brand mx-5" to="/">
-            SmileKart {' '}{isAdmin ? ' : Admins' : ''}
+            {/* <div className="col-md-5"> */}
+              <img src="../images/SmileKart.png" alt="" style={{ objectFit: "contain" }} height={50}/>
+            {/* </div> */}
+            {isAdmin ? ' : Admins' : ''}
           </Link>
           <button
             className="navbar-toggler"
@@ -103,7 +106,7 @@ export default function NavigationBar() {
       {isLogged ?
         <div className=" d-flex justify-content-end p-3">
           <div className="me-5 p-2 border">
-            Welcome {userInfor}
+            Welcome {userInfor[0].name}
           </div>
         </div> : ''}
     </>

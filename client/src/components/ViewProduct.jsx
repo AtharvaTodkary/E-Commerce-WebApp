@@ -18,7 +18,7 @@ export default function ViewProduct({ productInfo }) {
             <div className="card p-3" style={inforStyles.card}>
                 <div className="row">
                     <div className="col-md-6 d-flex align-items-center justify-content-center p-3">
-                        <img src={productInfo.images?.url} alt="Product Image" className="img-fluid rounded" height={300} width={300} />
+                        <img src={productInfo.images?.url} alt="Product" className="img-fluid rounded" height={300} width={300} />
                     </div>
                     <div className="col-md-6">
                         <h2 className="mt-3 fw-bolder fs-1">{productInfo.title}</h2>
@@ -33,7 +33,7 @@ export default function ViewProduct({ productInfo }) {
                         </div>
                         <div className="d-flex justify-content-start">
                             <div className="col-md-5 d-flex justify-content-between">
-                                <span onClick={()=>{addCart(productInfo)}} className="btn btn-cart mr-3" style={inforStyles.btnCart}>Add to Cart</span>
+                                <span onClick={()=>{addCart(productInfo)}} className="btn btn-cart mr-3"  style={inforStyles.btnCart}>Add to Cart</span>
                                 <span className="btn btn-outline-light">Buy Now</span>
                             </div>
                         </div>

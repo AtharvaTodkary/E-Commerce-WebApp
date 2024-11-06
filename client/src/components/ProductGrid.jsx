@@ -1,27 +1,34 @@
 import React, { useContext, useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import { GlobalState } from "../GlobalState";
-// import { Link } from "react-router-dom";
-export default function ProductGrid() {
 
+export default function ProductGrid() {
   const state = useContext(GlobalState);
   const products = state.productAPI.products;
 
   const [searchItem, setSearchItem] = useState('');
-  const [filteredData, setFilteredData] = useState(products)
+  const [filteredData, setFilteredData] = useState(products);
+
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 9; 
 
   useEffect(() => {
     setFilteredData(products);
   }, [products]);
 
+  // Reset search function
   function resetSearch() {
     setSearchItem('');
     setFilteredData(products);
+    setCurrentPage(1); 
   }
 
+  // Search function
   function handleSearchItem(e) {
     const item = e.target.value.toLowerCase();
     setSearchItem(item);
+    setCurrentPage(1); // Reset to the first page when a new search is made
 
     const filtered = products.filter((product) =>
       product.title.toLowerCase().includes(item) ||
@@ -32,7 +39,17 @@ export default function ProductGrid() {
 
     setFilteredData(filtered);
   }
-  // console.log(filteredData)
+
+  // Get current items for pagination
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
+
+  // Change page function
+  function paginate(pageNumber) {
+    setCurrentPage(pageNumber);
+  }
+
   return (
     <>
       <div className="col-md-12 d-flex justify-content-center p-3">
@@ -52,11 +69,12 @@ export default function ProductGrid() {
       <div className="d-flex justify-content-center p-3">
         <div className="container">
           <div className="row">
-
-            {filteredData.length !== 0 ?
-              filteredData.map((product) => (
+            {currentItems.length !== 0 ? (
+              currentItems.map((product) => (
                 <ProductCard key={product._id} product={product} />
-              )) : <div className="container container-fluid col-md-10 d-flex justify-content-center p-5">
+              ))
+            ) : (
+              <div className="container container-fluid col-md-10 d-flex justify-content-center p-5">
                 <div className="col-md-8">
                   <div className="fs-1 fw-bolder w-100 text-center ">
                     Item Not Found {':('}
@@ -66,9 +84,33 @@ export default function ProductGrid() {
                   </div>
                 </div>
               </div>
-            }
+            )}
           </div>
         </div>
+      </div>
+      {/* Pagination Controls */}
+      <div className="d-flex justify-content-center p-3">
+        <nav>
+          <ul className="pagination">
+            <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+              <button onClick={() => paginate(currentPage - 1)} className="page-link">
+                Previous
+              </button>
+            </li>
+            {Array.from({ length: Math.ceil(filteredData.length / itemsPerPage) }, (_, i) => (
+              <li key={i} className={`page-item ${currentPage === i + 1 ? 'active' : ''}`}>
+                <button onClick={() => paginate(i + 1)} className="page-link">
+                  {i + 1}
+                </button>
+              </li>
+            ))}
+            <li className={`page-item ${currentPage === Math.ceil(filteredData.length / itemsPerPage) ? 'disabled' : ''}`}>
+              <button onClick={() => paginate(currentPage + 1)} className="page-link">
+                Next
+              </button>
+            </li>
+          </ul>
+        </nav>
       </div>
     </>
   );

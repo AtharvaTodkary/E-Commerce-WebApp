@@ -39,7 +39,7 @@ export default function KartInfor({item}) {
             </div>
             <div className="col-md-3 d-flex justify-content-center row">
                 <div className="col-md-8 align-items-center row">
-                    <span className="fs-5 fw-medium text-center p-3">${item.price}</span>
+                    <span className="fs-5 fw-medium text-center p-3">₹{item.price}</span>
                     <Link to={`/details/${item._id}`} className="btn btn-primary">View Product</Link>
                 </div>
             </div>

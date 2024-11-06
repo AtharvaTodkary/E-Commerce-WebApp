@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import { GlobalState } from '../GlobalState';
 import KartSummary from './KartSummary';
 import KartInfor from './KartInfor';

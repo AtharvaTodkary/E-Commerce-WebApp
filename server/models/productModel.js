@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const productSchema = new mongoose.Schema(
   {
     product_id: {
-      type: String,  // Corrected "trype" to "type"
+      type: String, 
       unique: true,
       trim: true,
       required: true,
@@ -23,7 +23,7 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
     content: {
-      type: String,  // Corrected "tyep" to "type"
+      type: String, 
       required: true,
     },
     images: {
@@ -47,4 +47,4 @@ const productSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Products", productSchema);  // Corrected "moggose" to "mongoose"
+module.exports = mongoose.model("Products", productSchema);  

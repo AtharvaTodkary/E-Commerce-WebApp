@@ -68,6 +68,7 @@ export default function AddProduct() {
                 images: response.data
             });
             alert("Image uploaded successfully:", response.data);
+            console.log(response.data);
         } catch (error) {
             console.error("Error uploading image:", error);
             alert(error.response.data.msg);
